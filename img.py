@@ -1,4 +1,3 @@
-from time import time
 import warnings
 
 import scipy.ndimage
@@ -6,14 +5,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 from netCDF4 import Dataset
 
+from util import timeit
+
 np.seterr('ignore')
 warnings.filterwarnings('ignore')
+
 
 def get_var(filename, name):
     root = Dataset(filename, 'r')
     return root.variables[name]
 
 
+@timeit
 def convolve_slow(image, kernel):
     result = image.copy()
     d = image
@@ -32,6 +35,7 @@ def convolve_slow(image, kernel):
     return result
 
 
+@timeit
 def convolve_fast(image, kernel):
     return scipy.ndimage.convolve(image, kernel)
 
@@ -49,14 +53,10 @@ def main():
 
     blur_kernel = np.ones((3, 3)) * (1. / 9.)
 
-    t0 = time()
     convolved_fast = convolve_fast(data[::4, ::4], blur_kernel)
-    print('time to run convolve_fast: {}'.format(time()-t0))
     
     # slow implementation is so slow we only do every 4th point!
-    t0 = time()
     convolved_slow = convolve_slow(data[::4, ::4], blur_kernel)
-    print('time to run convolve_slow: {}'.format(time()-t0))
 
     cmap = "gray_r"
     plt.imshow(data, cmap=cmap, vmin=180, vmax=320)
