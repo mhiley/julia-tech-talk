@@ -29,10 +29,11 @@ def array_add_fast(a, b):
 
 
 if __name__ == '__main__':
+    size = 1000000
 
     # declare arrays w/ a million elements each
-    aa = numpy.linspace(0.0, 1.0, 1000000)
-    bb = numpy.linspace(1.0, 2.0, 1000000)
+    aa = numpy.linspace(0.0, 1.0, size)
+    bb = numpy.linspace(1.0, 2.0, size)
 
     array_sum_slow(aa)
     array_add_slow(aa, bb)
