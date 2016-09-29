@@ -8,7 +8,7 @@ def timeit(method):
         result = method(*args, **kw)
         te = time.time()
 
-        print '%r : %.4f sec' % \
+        print 'Running %s :\n  %.4f sec' % \
               (method.__name__, te-ts)
         return result
 

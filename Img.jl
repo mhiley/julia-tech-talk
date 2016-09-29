@@ -33,9 +33,9 @@ function run_img()
 
     blur_kernel = ones(Float32, 3, 3)/9.0
 
-    println("Running convolved_fast")
+    println("Running convolve_fast")
     @time convolved_fast = convolve_fast(data, blur_kernel)
-    println("Running convolved_slow")
+    println("Running convolve_slow")
     @time convolved_slow = convolve_slow(data, blur_kernel)
 
     cmap = "gray_r"

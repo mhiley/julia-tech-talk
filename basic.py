@@ -36,7 +36,7 @@ if __name__ == '__main__':
     bb = numpy.linspace(1.0, 2.0, size)
 
     array_sum_slow(aa)
-    array_add_slow(aa, bb)
-
     array_sum_fast(aa)
+
+    array_add_slow(aa, bb)
     array_add_fast(aa, bb)
