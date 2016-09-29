@@ -46,6 +46,9 @@ def main():
 
     data = data[::-1, :]  # put north on top of image result
 
+    # only do every 4th point cuz our "slow" implementation is REALLY SLOW!
+    data = data[::4, ::4]
+
     edge_kernel = np.array([ [-1., -1., -1.],
                              [-1.,  8., -1.],
                              [-1., -1., -1.],
@@ -53,10 +56,9 @@ def main():
 
     blur_kernel = np.ones((3, 3)) * (1. / 9.)
 
-    convolved_fast = convolve_fast(data[::4, ::4], blur_kernel)
+    convolved_fast = convolve_fast(data, blur_kernel)
     
-    # slow implementation is so slow we only do every 4th point!
-    convolved_slow = convolve_slow(data[::4, ::4], blur_kernel)
+    convolved_slow = convolve_slow(data, blur_kernel)
 
     cmap = "gray_r"
     plt.imshow(data, cmap=cmap, vmin=180, vmax=320)
