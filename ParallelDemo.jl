@@ -12,3 +12,4 @@ b = @spawn count_heads(n)
 c = @spawn count_heads(n)
 d = @spawn count_heads(n)
 println("Percent heads: ", (fetch(a)+fetch(b)+fetch(c)+fetch(d)) / (n*4.))
+
