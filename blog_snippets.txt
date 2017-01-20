@@ -1,0 +1,53 @@
+# CODE EXAMPLE: array_sum_slow  LANGUAGE: python
+def array_sum_slow(a):
+    total = 0
+    for i in range(len(a)):
+        total += a[i]
+    return total
+
+
+
+
+# CODE EXAMPLE: array_sum_fast  LANGUAGE: python
+def array_sum_fast(a):
+    return a.sum()
+
+
+
+
+# CODE EXAMPLE: convolve_slow  LANGUAGE: python
+def convolve_slow(image, kernel):
+    result = image.copy()
+    d = image
+    for i in range(d.shape[0]):
+        for j in range(d.shape[1]):
+            try:
+                cur = np.array(
+                        [ [d[i-1, j-1], d[i, j-1], d[i+1, j-1]],
+                          [d[i-1,   j], d[i,   j], d[i+1,   j]],
+                          [d[i-1, j+1], d[i, j+1], d[i+1, j+1]],
+                        ])
+                result[i, j] = (cur * kernel).sum()
+            except IndexError:
+                pass # skip boundaries
+
+    return result
+
+
+
+
+# CODE EXAMPLE: convolve_slow  LANGUAGE: Julia
+function convolve_slow(image, kernel)
+    result = copy(image)
+    d = image
+    for i = 2:size(d, 1) - 1
+        for j = 2:size(d, 2) - 1
+            cur = [ d[i-1, j-1] d[i, j-1] d[i+1, j-1];
+                    d[i-1,   j] d[i,   j] d[i+1,   j];
+                    d[i-1, j+1] d[i, j+1] d[i+1, j+1]
+                  ]
+            result[i, j] = sum(cur .* kernel)
+        end
+    end
+    result
+end
