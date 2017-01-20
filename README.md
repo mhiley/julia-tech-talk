@@ -1,1 +1,3 @@
-Code for tech talk at Earthling Interactive about the Julia Programming Language, 2016-09-28
+Code used for Sep. 29, 2016 Tech Talk at Earthling Interactive titled:
+
+Overview of the Julia Programming Language
